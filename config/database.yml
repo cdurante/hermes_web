@@ -1,0 +1,24 @@
+
+development:
+  adapter: postgresql
+  encoding: unicode
+  database: hermes_web_development
+  pool: 5
+  username: hermes_web
+  password:
+
+test:
+  adapter: postgresql
+  encoding: unicode
+  database: hermes_web_test
+  pool: 5
+  username: hermes_web
+  password:
+
+production:
+  adapter: postgresql
+  encoding: unicode
+  database: hermes_web_production
+  pool: 5
+  username: hermes_web
+  password:
