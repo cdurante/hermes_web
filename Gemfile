@@ -12,7 +12,16 @@ gem 'coffee-rails', '4.0.1'
 gem 'jquery-rails', '3.0.4'
 gem 'turbolinks', '1.1.1'
 gem 'jbuilder', '1.0.2'
+
+# twitter bootstrap css & javascript toolkit
+gem 'twitter-bootswatch-rails', '~> 3.1.1'
+
+# twitter bootstrap helpers gem, e.g., alerts etc...
+gem 'twitter-bootswatch-rails-helpers'
   
+gem 'execjs'
+gem 'therubyracer'
+
 group :development, :test do
 
   gem 'rspec-rails', '2.13.1'
