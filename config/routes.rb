@@ -1,8 +1,16 @@
 HermesWeb::Application.routes.draw do
 
+  resources :forms
+
+  resources :appointments
+
+  get "users/new"
+  resources :users
+
   root  'static_pages#home'
   match '/wiki',   to: 'static_pages#wiki',   via: 'get'
   match '/contact', to: 'static_pages#contact', via: 'get'
+  match '/users', to: 'users#index', via: 'get' 
 
 
   # The priority is based upon order of creation: first created -> highest priority.
