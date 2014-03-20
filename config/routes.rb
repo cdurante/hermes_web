@@ -10,7 +10,9 @@ HermesWeb::Application.routes.draw do
   root  'static_pages#home'
   match '/wiki',   to: 'static_pages#wiki',   via: 'get'
   match '/contact', to: 'static_pages#contact', via: 'get'
-  match '/users', to: 'users#index', via: 'get' 
+  match '/users', to: 'users#index', via: 'get'
+  match '/forms', to: 'forms#index', via: 'get'
+  match '/appointments', to: 'appointments#index', via: 'get' 
 
 
   # The priority is based upon order of creation: first created -> highest priority.

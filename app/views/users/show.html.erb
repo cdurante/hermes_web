@@ -1,6 +1,11 @@
 <p id="notice"><%= notice %></p>
 
 <p>
+  <strong>id:</strong>
+  <%= @user.id %>
+</p>
+
+<p>
   <strong>Username:</strong>
   <%= @user.userName %>
 </p>
@@ -16,11 +21,6 @@
 </p>
 
 <p>
-  <strong>Userkey:</strong>
-  <%= @user.userKey %>
-</p>
-
-<p>
   <strong>Email:</strong>
   <%= @user.email %>
 </p>
@@ -30,10 +30,6 @@
   <%= @user.lastlogin %>
 </p>
 
-<p>
-  <strong>Signedup:</strong>
-  <%= @user.signedup %>
-</p>
 
 <p>
   <strong>Usertype:</strong>

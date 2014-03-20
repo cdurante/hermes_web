@@ -17,7 +17,6 @@ ActiveRecord::Schema.define(version: 20140320211709) do
   enable_extension "plpgsql"
 
   create_table "appointments", force: true do |t|
-    t.integer  "appointmentKey"
     t.datetime "date"
     t.string   "location"
     t.text     "notes"
@@ -26,7 +25,6 @@ ActiveRecord::Schema.define(version: 20140320211709) do
   end
 
   create_table "forms", force: true do |t|
-    t.integer  "formkey"
     t.datetime "dateshared"
     t.datetime "duedate"
     t.string   "source"

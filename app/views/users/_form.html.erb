@@ -12,20 +12,16 @@
   <% end %>
 
   <div class="field">
-    <%= f.label :userName %><br>
+    <%= f.label :userName, "username" %><br>
     <%= f.text_field :userName %>
   </div>
   <div class="field">
-    <%= f.label :realName %><br>
+    <%= f.label :realName, "Full Name" %><br>
     <%= f.text_field :realName %>
   </div>
   <div class="field">
-    <%= f.label :dob %><br>
+    <%= f.label :dob, "Date of Birth" %><br>
     <%= f.date_select :dob %>
-  </div>
-  <div class="field">
-    <%= f.label :userKey %><br>
-    <%= f.number_field :userKey %>
   </div>
   <div class="field">
     <%= f.label :email %><br>
@@ -35,12 +31,9 @@
     <%= f.label :lastlogin %><br>
     <%= f.date_select :lastlogin %>
   </div>
+
   <div class="field">
-    <%= f.label :signedup %><br>
-    <%= f.date_select :signedup %>
-  </div>
-  <div class="field">
-    <%= f.label :usertype %><br>
+    <%= f.label :usertype, "User Type" %><br>
     <%= f.text_field :usertype %>
   </div>
   <div class="actions">
