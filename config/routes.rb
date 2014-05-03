@@ -1,24 +1,30 @@
 HermesWeb::Application.routes.draw do
-  resources :forms
-  resources :appointments
-  resources :users
-  resources :sessions, only: [:new, :create, :destroy]
-  root  'static_pages#home'
- match '/signup',  to: 'users#new',            via: 'get'
-  match '/signin',  to: 'sessions#new',         via: 'get'
-  match '/signout', to: 'sessions#destroy',     via: 'delete'
-  match '/wiki',   to: 'static_pages#wiki',   via: 'get'
+  devise_for :users, :skip => [:sessions]
+  as :user do
+    get 'signin' => 'devise/sessions#new', :as => :new_user_session
+    post 'signin' => 'devise/sessions#create', :as => :user_session
+    delete 'signout' => 'devise/sessions#destroy', :as => :destroy_user_session
+  end
+
+  resources :users do
+    member do
+	get :following, :followers
+    end
+  end
+
+  resources :relationships, only: [:create, :destroy]
+  root :to => 'static_pages#home'
+  match '/help',    to: 'static_pages#help',    via: 'get'
+  match '/about',   to: 'static_pages#about',   via: 'get'
   match '/contact', to: 'static_pages#contact', via: 'get'
-  match '/users', to: 'users#index', via: 'get'
-  match '/forms', to: 'forms#index', via: 'get'
-  match '/appointments', to: 'appointments#index', via: 'get' 
+
 
 
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
 
   # You can have the root of your site routed with "root"
-   
+#  root 'static_pages#home'
 
   # Example of regular route:
   #   get 'products/:id' => 'catalog#view'

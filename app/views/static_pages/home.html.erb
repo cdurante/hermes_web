@@ -1,9 +1,5 @@
-<div class="jumbotron">
-  <h1>Hermes</h1>
-  <h2>a useful way to handle patient forms for iPhone</h2>
-
-  <h2>
-    Welcome aboard, we're riding Ruby on Rails
-  </h2>
-<%= link_to "Sign up now!", signup_path, class: "btn btn-large btn-primary" %>
-</div>
+<% if signed_in? %>
+  <%= render 'shared/signedin' %>
+<% else %>
+  <%= render 'shared/createhome' %>
+<% end %>
