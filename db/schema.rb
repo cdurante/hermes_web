@@ -32,7 +32,6 @@ ActiveRecord::Schema.define(version: 20140424055255) do
     t.string   "email",                  default: "",    null: false
     t.datetime "created_at"
     t.datetime "updated_at"
-    t.string   "password_digest"
     t.string   "remember_token"
     t.boolean  "admin",                  default: false
     t.string   "encrypted_password",     default: "",    null: false

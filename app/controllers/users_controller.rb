@@ -1,8 +1,8 @@
 class UsersController < ApplicationController
   
-  # before_action :signed_in_user, only: [:index, :edit, :update, :destroy, :following, :followers]
-  # before_action :correct_user,   only: [:edit, :update]
-  # before_action :admin_user,     only: :destroy
+  before_action :signed_in_user, only: [:index, :edit, :update, :destroy, :following, :followers]
+  before_action :correct_user,   only: [:edit, :update]
+respond_to 
 
 
   def index
@@ -19,7 +19,7 @@ class UsersController < ApplicationController
       respond_to do |format|
       format.html
       format.xml { render xml: @user }
-      format.json { render :json => @user }
+      format.json { render json: @user }
       end    
   end
 
@@ -38,7 +38,7 @@ class UsersController < ApplicationController
   end
 
   def new
-    if signed_in?
+    if user_signed_in?
 	redirect_to root_path
     else
       @user = User.new
@@ -46,7 +46,7 @@ class UsersController < ApplicationController
   end
 
   def create
-    if signed_in?
+    if user_signed_in?
       redirect_to root_path
     else
       @user = User.new(user_params)    # Not the final implementation!
@@ -96,6 +96,22 @@ class UsersController < ApplicationController
 
   def admin_user
     redirect_to(root_url) unless current_user.admin?
+  end
+
+def signed_in_user
+  unless user_signed_in?
+    store_location
+          redirect_to new_user_registration_path, notice: "Please sign in."
+  end
+  end
+
+    def redirect_back_or(default)
+    redirect_to(session[:return_to] || default)
+    session.delete(:return_to)
+  end
+
+  def store_location
+    session[:return_to] = request.url if request.get?
   end
 
 end
