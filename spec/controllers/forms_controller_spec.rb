@@ -23,7 +23,7 @@ describe FormsController do
   # This should return the minimal set of attributes required to create a valid
   # Form. As you add validations to Form, be sure to
   # adjust the attributes here as well.
-  let(:valid_attributes) { { "formkey" => "1" } }
+  let(:valid_attributes) { {  } }
 
   # This should return the minimal set of values that should be in the session
   # in order to pass any filters (e.g. authentication) defined in
@@ -85,14 +85,14 @@ describe FormsController do
       it "assigns a newly created but unsaved form as @form" do
         # Trigger the behavior that occurs when invalid params are submitted
         Form.any_instance.stub(:save).and_return(false)
-        post :create, {:form => { "formkey" => "invalid value" }}, valid_session
+        post :create, {:form => {  }}, valid_session
         assigns(:form).should be_a_new(Form)
       end
 
       it "re-renders the 'new' template" do
         # Trigger the behavior that occurs when invalid params are submitted
         Form.any_instance.stub(:save).and_return(false)
-        post :create, {:form => { "formkey" => "invalid value" }}, valid_session
+        post :create, {:form => {  }}, valid_session
         response.should render_template("new")
       end
     end
@@ -106,8 +106,8 @@ describe FormsController do
         # specifies that the Form created on the previous line
         # receives the :update_attributes message with whatever params are
         # submitted in the request.
-        Form.any_instance.should_receive(:update).with({ "formkey" => "1" })
-        put :update, {:id => form.to_param, :form => { "formkey" => "1" }}, valid_session
+        Form.any_instance.should_receive(:update).with({ "these" => "params" })
+        put :update, {:id => form.to_param, :form => { "these" => "params" }}, valid_session
       end
 
       it "assigns the requested form as @form" do
@@ -128,7 +128,7 @@ describe FormsController do
         form = Form.create! valid_attributes
         # Trigger the behavior that occurs when invalid params are submitted
         Form.any_instance.stub(:save).and_return(false)
-        put :update, {:id => form.to_param, :form => { "formkey" => "invalid value" }}, valid_session
+        put :update, {:id => form.to_param, :form => {  }}, valid_session
         assigns(:form).should eq(form)
       end
 
@@ -136,7 +136,7 @@ describe FormsController do
         form = Form.create! valid_attributes
         # Trigger the behavior that occurs when invalid params are submitted
         Form.any_instance.stub(:save).and_return(false)
-        put :update, {:id => form.to_param, :form => { "formkey" => "invalid value" }}, valid_session
+        put :update, {:id => form.to_param, :form => {  }}, valid_session
         response.should render_template("edit")
       end
     end

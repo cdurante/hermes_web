@@ -2,7 +2,6 @@ class UsersController < ApplicationController
   
   before_action :signed_in_user, only: [:index, :edit, :update, :destroy, :following, :followers]
   before_action :correct_user,   only: [:edit, :update]
-respond_to 
 
 
   def index
@@ -46,17 +45,27 @@ respond_to
   end
 
   def create
-    if user_signed_in?
-      redirect_to root_path
-    else
-      @user = User.new(user_params)    # Not the final implementation!
+    respond_to do |format|
+      format.html {
+        if user_signed_in?
+        redirect_to root_path
+        else
+        @user = User.new(user_params)    # Not the final implementation!
+        if @user.save
+          sign_in @user
+          flash[:success] = "Welcome to Hermes!"
+          redirect_to @user
+        else
+          render 'new'
+        end
+        end
+    }
+    
+    format.json {
+      @user = User.new(user_params)
       if @user.save
-        sign_in @user
-        flash[:success] = "Welcome to Hermes!"
-        redirect_to @user
-      else
-        render 'new'
-      end
+        render json: @user
+      end}
     end
   end
 

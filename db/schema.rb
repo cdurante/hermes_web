@@ -11,10 +11,22 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140424055255) do
+ActiveRecord::Schema.define(version: 20140504230611) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
+
+  create_table "forms", force: true do |t|
+    t.integer  "template_id"
+    t.string   "template_name"
+    t.integer  "user_id"
+    t.datetime "due_date"
+    t.string   "location_url"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  add_index "forms", ["user_id", "created_at"], name: "index_forms_on_user_id_and_created_at", using: :btree
 
   create_table "relationships", force: true do |t|
     t.integer  "follower_id"
