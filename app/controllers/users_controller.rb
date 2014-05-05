@@ -1,8 +1,10 @@
 class UsersController < ApplicationController
   
+  
   before_action :signed_in_user, only: [:index, :edit, :update, :destroy, :following, :followers]
   before_action :correct_user,   only: [:edit, :update]
 
+  skip_before_filter :verify_authenticity_token, :only => :create
 
   def index
     respond_to do |format|
