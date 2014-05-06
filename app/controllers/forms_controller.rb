@@ -8,6 +8,15 @@ class FormsController < ApplicationController
 
   # GET /forms/1
   def show
+    @form = Form.find(params[:id])
+    respond_to do |format|
+      format.html{
+        render html: @form
+      }
+      format.json{
+        render json: @form
+      }
+    end
   end
 
   # GET /forms/new
@@ -20,13 +29,24 @@ class FormsController < ApplicationController
   end
 
   # POST /forms
-  def create
-    @form = Form.new(form_params)
-
-    if @form.save
-      redirect_to @form, notice: 'Form was successfully created.'
-    else
-      render action: 'new'
+  def create 
+    respond_to do |format|
+        format.html{
+          @form = Form.new(form_params)
+          if @form.save
+            redirect_to @form, notice: 'Form was successfully created.'
+          else
+            render action: 'new'
+          end
+        }
+        format.json{
+          @form = Form.new(form_params)
+          if @form.save
+            render json: @form
+          else
+            render json: 'There was an error'
+          end
+        }
     end
   end
 
@@ -53,6 +73,6 @@ class FormsController < ApplicationController
 
     # Only allow a trusted parameter "white list" through.
     def form_params
-      params[:form]
+      params.require(:form).permit(:template_id, :user_id, :due_date)
     end
 end

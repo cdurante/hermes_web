@@ -1,6 +1,6 @@
 <h2>Sign up</h2>
 
-<%= form_for(resource, as: resource_name, url: registration_path(resource_name)) do |f| %>
+<%= form_for(@user, as: @user, url: registration_path(@user)) do |f| %>
 
 <%= render 'shared/error_messages', object: f.object %>
 
@@ -15,6 +15,9 @@
 
 <%= f.label :password_confirmation, "Confirm Password" %>
 <%= f.password_field :password_confirmation %>
+
+<%= f.label :physician, "Select User Type" %>
+<%= f.select :physician, [['Physician',true],['Patient',false]] %>
 
  <%= f.submit "Create my account", class: "btn btn-large btn-primary" %>
 <% end %>

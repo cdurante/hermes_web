@@ -11,7 +11,7 @@ HermesWeb::Application.routes.draw do
 	get :following, :followers
     end
   end
-
+  resources :forms
   resources :relationships, only: [:create, :destroy]
   root :to => 'static_pages#home'
   match '/help',    to: 'static_pages#help',    via: 'get'
