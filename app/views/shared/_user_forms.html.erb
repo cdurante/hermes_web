@@ -1,0 +1,7 @@
+<% @user ||= current_user %>
+
+<p>
+<%= Form.find_by(user_id: @user.id).template_id %>
+
+</p>
+

@@ -17,12 +17,17 @@ class UsersController < ApplicationController
 
   def show
       @user = User.find(params[:id])
+      @forms = Form.find_by(user_id: @user.id)
+      
       respond_to do |format|
       format.html
-      format.xml { render xml: @user }
-      format.json { render json: @user }
+ 
+      format.json { render :json => @user.to_json(:include => [:forms])}
+      
       end    
   end
+
+
 
   def following
     @title = "Patients"
