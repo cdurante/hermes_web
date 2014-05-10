@@ -19,7 +19,7 @@ user = User.find_by_email(params[:user][:email])
              }
       end
     else
-     render json: 'unicorn'
+     
     end
   end
 
