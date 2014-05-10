@@ -7,20 +7,13 @@ skip_before_action :verify_authenticity_token
 
   def create
 
-user = User.find_by_email(params[:user][:email])
-  
-    
-    if user && user.valid_password?(params[:user][:password])
-    
-      respond_to do |format|
-        
-        format.json{
-                render json: user
-             }
+    user = User.find_by_email!(params[:email])
+
+      if user && user.valid_password?(params[:password])
+        render json: user
+      else
+        render json: 'invalid'
       end
-    else
-     
-    end
   end
 
   def destroy
