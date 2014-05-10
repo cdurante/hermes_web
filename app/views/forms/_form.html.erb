@@ -12,8 +12,8 @@
   <% end %>
 
 <div class="field">
-  <%= f.label :template_id, "Form Type" %>
-  <%= f.select :template_id, [['Dental',1],['Drug Abuse',2],['Eating Disorder',3],['VA Benefits',4]] %>
+  <%= f.label :template_name, "Form Type" %>
+  <%= f.select :template_name, ['Dental', 'Drug Abuse', 'Eating Disorder','VA Benefits'] %>
 
   <%= f.label :user_id, "Patient Recipient" %>
   <%= f.collection_select :user_id, User.find(:all, :conditions => "physician=false"), :id, :name %>
@@ -21,6 +21,8 @@
 
   <%= f.label :due_date, "Form Due Date" %>
   <%= f.date_select :due_date %>
+
+
 
   <div class="actions">
     <%= f.submit %>

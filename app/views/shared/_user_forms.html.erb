@@ -1,7 +1,19 @@
 <% @user ||= current_user %>
 
+<h1> Users's Forms <h1>
+
+
 <p>
-<%= Form.find_by(user_id: @user.id).template_id %>
-
+	<% @forms = Form.where(user_id: @user.id) %>
+<tbody>
+    <% @forms.each do |form| %>
+      <tr>
+      	<h2><%= form.template_name %><h2>
+        <td><%= link_to 'Show', form %></td>
+        <td><%= link_to 'Edit', edit_form_path(form) %></td>
+        <td><%= link_to 'Destroy', form, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
 </p>
-

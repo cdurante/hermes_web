@@ -30,9 +30,10 @@ class FormsController < ApplicationController
 
   # POST /forms
   def create 
+    @form = Form.new(form_params)
     respond_to do |format|
         format.html{
-          @form = Form.new(form_params)
+          
           if @form.save
             redirect_to @form, notice: 'Form was successfully created.'
           else
@@ -40,7 +41,7 @@ class FormsController < ApplicationController
           end
         }
         format.json{
-          @form = Form.new(form_params)
+          
           if @form.save
             render json: @form
           else
@@ -73,6 +74,6 @@ class FormsController < ApplicationController
 
     # Only allow a trusted parameter "white list" through.
     def form_params
-      params.require(:form).permit(:template_id, :user_id, :due_date)
+      params.require(:form).permit(:template_name, :user_id, :due_date)
     end
 end

@@ -17,7 +17,7 @@ ActiveRecord::Schema.define(version: 20140505220910) do
   enable_extension "plpgsql"
 
   create_table "forms", force: true do |t|
-    t.integer  "template_id"
+    t.string   "template_name"
     t.integer  "user_id"
     t.date     "due_date"
     t.string   "location_url"

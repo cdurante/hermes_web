@@ -1,7 +1,7 @@
 class CreateForms < ActiveRecord::Migration
   def change
     create_table :forms do |t|
-    t.integer :template_id
+    t.string :template_name
     t.integer :user_id
     t.date :due_date
     t.string :location_url
