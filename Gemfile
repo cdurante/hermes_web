@@ -18,6 +18,9 @@ ruby '2.1.0'
   gem 'devise'
   gem 'paperclip'
   gem 'aws-sdk'
+  gem 'seed_dump'
+  gem 'byebug'
+  gem 'jeweler'
   
 group :development, :test do
 
