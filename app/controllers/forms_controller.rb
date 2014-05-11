@@ -1,6 +1,11 @@
 class FormsController < ApplicationController
   before_action :set_form, only: [:show, :edit, :update, :destroy]
 
+  $formsURLS = { "Dental" => "/dental.pdf", 
+                "Drug Abuse" => "/drugAbuse.pdf", 
+                "Eating Disorder" => "/eatingDisorder.pdf",
+                "VA Benefits" => "/vABenefits.pdf"}
+
   # GET /forms
   def index
     @forms = Form.all
@@ -35,6 +40,8 @@ class FormsController < ApplicationController
         format.html{
           
           if @form.save
+
+             @form.update_attribute(:location_url, $formsURLS[@form.template_name])
             redirect_to @form, notice: 'Form was successfully created.'
           else
             render action: 'new'
@@ -43,6 +50,7 @@ class FormsController < ApplicationController
         format.json{
           
           if @form.save
+
             render json: @form
           else
             render json: 'There was an error'
