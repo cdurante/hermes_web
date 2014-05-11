@@ -1,11 +1,13 @@
 class FormsController < ApplicationController
   before_action :set_form, only: [:show, :edit, :update, :destroy]
 
-  $formsURLS = { "Dental" => "/dental.pdf", 
-                "Drug Abuse" => "/drugAbuse.pdf", 
-                "Eating Disorder" => "/eatingDisorder.pdf",
-                "VA Benefits" => "/vABenefits.pdf"}
-
+  $formsURLS = { "Dental" => "dental.pdf", 
+                "Drug Abuse" => "drugAbuse.pdf", 
+                "Eating Disorder" => "eatingDisorder.pdf",
+                "VA Benefits" => "vABenefits.pdf"}
+  
+  $awsBase = "https://s3.amazonaws.com/hermesapp/"
+  
   # GET /forms
   def index
     @forms = Form.all
@@ -41,7 +43,7 @@ class FormsController < ApplicationController
           
           if @form.save
 
-             @form.update_attribute(:location_url, $formsURLS[@form.template_name])
+             @form.update_attribute(:location_url, "/"+$formsURLS[@form.template_name])
             redirect_to @form, notice: 'Form was successfully created.'
           else
             render action: 'new'
@@ -61,11 +63,28 @@ class FormsController < ApplicationController
 
   # PATCH/PUT /forms/1
   def update
+
     if @form.update(form_params)
-      redirect_to @form, notice: 'Form was successfully updated.'
-    else
-      render action: 'edit'
-    end
+        @form.update_attribute(:location_url, $awsBase+User.find(@form.user_id).name+"-"+$formsURLS[@form.template_name])
+        respond_to do |format|
+          format.html{
+              redirect_to @form, notice: 'Form was successfully updated.'
+          }
+          format.json{
+
+            render json: 1
+          }
+        end
+      else
+        respond_to do |format|
+          format.html{
+            render action: 'edit'
+          }
+          format.json{
+            render json: 0
+          }
+        end
+      end
   end
 
   # DELETE /forms/1
