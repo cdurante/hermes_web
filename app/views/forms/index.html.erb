@@ -1,24 +1,31 @@
-<% provide(:title, 'All users') %>
+<% provide(:title, 'All Forms') %>
 <h1>All Forms</h1>
 
 <table>
+  
   <thead>
+   
     <tr>
-      <th></th>
-      <th></th>
-      <th></th>
+      <th>Form ID</th>
+      <th>Form Name</th>
+      <th>Patient</th>
     </tr>
+
   </thead>
 
   <tbody>
     <% @forms.each do |form| %>
       <tr>
+        <td><%= form.id %></td>
+        <td><%= form.template_name %></td>
+        <td><%= User.find(form.user_id).name %></td>
         <td><%= link_to 'Show', form %></td>
         <td><%= link_to 'Edit', edit_form_path(form) %></td>
         <td><%= link_to 'Destroy', form, method: :delete, data: { confirm: 'Are you sure?' } %></td>
       </tr>
     <% end %>
   </tbody>
+
 </table>
 
 <br>
