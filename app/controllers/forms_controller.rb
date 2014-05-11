@@ -65,6 +65,7 @@ class FormsController < ApplicationController
   def update
 
     if @form.update(form_params)
+       @form.update_attribute(:location_url, $awsBase+User.find(@form.user_id).name+"-"+$formsURLS[@form.template_name])
         respond_to do |format|
           format.html{
               redirect_to @form, notice: 'Form was successfully updated.'
@@ -85,11 +86,6 @@ class FormsController < ApplicationController
         end
       end
   end
-
-  def update_url
-  @form.update_attribute(:location_url, $awsBase+User.find(@form.user_id).name+"-"+$formsURLS[@form.template_name])
-  end
-
 
   # DELETE /forms/1
   def destroy
